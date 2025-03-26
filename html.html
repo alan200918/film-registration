@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Awesome Jungle Studios - Registration</title>
+    <style>
+        /* Style the body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe6f2;
+        }
+
+        /* Header Style */
+        header {
+            background-color: #ff80b3;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+        }
+
+        /* Form Container */
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style form elements */
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Style buttons */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff4d94;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn:hover {
+            background-color: #e60073;
+        }
+
+        /* Reset button style */
+        .btn-reset {
+            background-color: #999;
+        }
+
+        .btn-reset:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        Welcome to Awesome Jungle Studios 🎥
+    </header>
+
+    <!-- Form Container -->
+    <div class="container">
+        <h2 style="text-align: center; color: #ff4d94;">Join Our Film Production Team</h2>
+
+        <!-- Registration Form -->
+        <form id="registrationForm" onsubmit="return saveAndRedirect();">
+            
+            <!-- Name Fields -->
+            <label>First Name:</label>
+            <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
+
+            <label>Last Name:</label>
+            <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
+
+            <!-- Role Selection -->
+            <label>Preferred Role:</label>
+            <select id="role" name="role" required>
+                <option value="">Select Role</option>
+                <option value="Director">Director</option>
+                <option value="Producer">Producer</option>
+                <option value="Actor">Actor/Actress</option>
+                <option value="Cinematographer">Cinematographer</option>
+                <option value="Editor">Editor</option>
+                <option value="Scriptwriter">Scriptwriter</option>
+                <option value="Sound Designer">Sound Designer</option>
+            </select>
+
+            <!-- Experience -->
+            <label>Experience Level:</label>
+            <select id="experience" name="experience" required>
+                <option value="">Select Experience Level</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Expert">Expert</option>
+            </select>
+
+            <!-- Gender -->
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="Male" required> Male
+            <input type="radio" id="female" name="gender" value="Female" required> Female
+            <input type="radio" id="other" name="gender" value="Other" required> Other
+            <br><br>
+
+            <!-- Submit and Reset Buttons -->
+            <input type="submit" class="btn" value="Submit Application">
+            <input type="reset" class="btn btn-reset" value="Reset Form" onclick="clearStoredData()">
+        </form>
+    </div>
+
+    <script>
+        // Check if user is already registered and redirect to styles.html
+        window.onload = function() {
+            const userData = localStorage.getItem("userDetails");
+            if (userData) {
+                // Redirect if data is found
+                window.location.href = "styles.html";
+            }
+        };
+
+        // Save user details and redirect to styles.html
+        function saveAndRedirect() {
+            const firstname = document.getElementById("firstname").value;
+            const lastname = document.getElementById("lastname").value;
+            const role = document.getElementById("role").value;
+            const experience = document.getElementById("experience").value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+
+            // Store data in localStorage
+            const userDetails = {
+                firstname: firstname,
+                lastname: lastname,
+                role: role,
+                experience: experience,
+                gender: gender
+            };
+
+            localStorage.setItem("userDetails", JSON.stringify(userDetails));
+
+            // Redirect to styles.html after submission
+            window.location.href = "styles.html";
+            return false; // Prevent default form submission
+        }
+
+        // Clear stored data on reset
+        function clearStoredData() {
+            localStorage.removeItem("userDetails");
+        }
+    </script>
+
+</body>
+</html>
+
+
